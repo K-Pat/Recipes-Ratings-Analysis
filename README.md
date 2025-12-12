@@ -1,4 +1,4 @@
-# Predicting Recipe Calories: A Machine Learning Approach
+# Predicting Recipe Calories:
 
 ### Name: Kavyan Patel
 
@@ -20,7 +20,7 @@ This data science project, conducted at UCSD, focuses on predicting the calorie 
 
 This data science project investigates what types of recipes tend to have the most calories and builds a predictive model to estimate calorie content. my goal is to explore the relationship between recipe characteristics (such as ingredients, cooking time, and recipe categories) and calorie content, then develop a machine learning model that can accurately predict calories for new recipes.
 
-The dataset, sourced from food.com, includes over 83,000 recipes collected since 2008. It provides detailed information on nutrition, ingredients, cooking instructions, and recipe categories. By analyzing this data, we can identify patterns in calorie content and build predictive models that help users estimate the nutritional value of recipes before preparing them.
+The dataset, sourced from food.com, includes over 83,000 recipes collected since 2008. It provides detailed information on nutrition, ingredients, cooking instructions, and recipe categories. By analyzing this data, I can identify patterns in calorie content and build predictive models that help users estimate the nutritional value of recipes before preparing them.
 
 ### This is a description of what the recipes dataframe contains (83,782 rows):
 
@@ -49,15 +49,15 @@ The relevant columns for answering our question are: `nutrition` (contains calor
 
 The data cleaning process involved several key steps to prepare the dataset for analysis:
 
-1. **Parsing the nutrition column**: The `nutrition` column was stored as a string representation of a list. We used `ast.literal_eval()` to parse it into individual components, extracting calories and other nutritional values (total fat, sugar, sodium, protein, saturated fat, and carbohydrates) as separate columns.
+1. **Parsing the nutrition column**: The `nutrition` column was stored as a string representation of a list. I parsed it into individual components, extracting calories and other nutritional values (total fat, sugar, sodium, protein, saturated fat, and carbohydrates) as separate columns.
 
-2. **Parsing the tags column**: Similar to nutrition, the `tags` column was stored as a string representation of a list. We parsed it to create a `tags_list` column containing actual Python lists, and created a `n_tags` column counting the number of tags per recipe.
+2. **Parsing the tags column**: Similar to nutrition, the `tags` column was stored as a string representation of a list. I parsed it to create a `tags_list` column containing actual Python lists, and created a `n_tags` column counting the number of tags per recipe.
 
-3. **Parsing the ingredients column**: The `ingredients` column was also stored as a string representation of a list. We parsed it to create an `ingredients_list` column for easier analysis.
+3. **Parsing the ingredients column**: The `ingredients` column was also stored as a string representation of a list. I parsed it to create an `ingredients_list` column for easier analysis.
 
 4. **Converting date column**: The `submitted` column was converted from string format to datetime using `pd.to_datetime()` with error handling.
 
-5. **Cleaning calorie values**: We replaced any negative or unrealistic calorie values (greater than 10,000 calories per serving) with NaN, as these likely represent data entry errors or parsing failures.
+5. **Cleaning calorie values**: I replaced any negative or unrealistic calorie values (greater than 10,000 calories per serving) with NaN, as these likely represent data entry errors or parsing failures.
 
 After cleaning, the dataset contained 83,782 rows with 22 columns. Only 39 recipes (0.05%) had missing calorie values, which were handled appropriately in subsequent analyses.
 
