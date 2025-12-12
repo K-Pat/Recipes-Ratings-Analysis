@@ -3,7 +3,7 @@
 ### Name: Kavyan Patel
 
 # Overview
-This data science project, conducted at UCSD, focuses on predicting the calorie content of recipes using machine learning techniques. By analyzing recipe characteristics such as ingredients, cooking time, and recipe categories, we build predictive models to estimate calorie counts and evaluate their fairness across different recipe types.
+This data science project, conducted at UCSD, focuses on predicting the calorie content of recipes using machine learning techniques. By analyzing recipe characteristics such as ingredients, cooking time, and recipe categories, I built a predictive model to estimate calorie counts and evaluate their fairness across different recipe types.
 
 # Table of Contents
 - [Introduction](#introduction)
@@ -18,7 +18,7 @@ This data science project, conducted at UCSD, focuses on predicting the calorie 
 <!-- #region -->
 # Introduction <a name="Introduction"></a>
 
-This data science project investigates what types of recipes tend to have the most calories and builds a predictive model to estimate calorie content. With growing health consciousness and the need for nutritional information, understanding the factors that influence recipe calories is valuable for both consumers and food platforms. Our goal is to explore the relationship between recipe characteristics (such as ingredients, cooking time, and recipe categories) and calorie content, then develop a machine learning model that can accurately predict calories for new recipes.
+This data science project investigates what types of recipes tend to have the most calories and builds a predictive model to estimate calorie content. my goal is to explore the relationship between recipe characteristics (such as ingredients, cooking time, and recipe categories) and calorie content, then develop a machine learning model that can accurately predict calories for new recipes.
 
 The dataset, sourced from food.com, includes over 83,000 recipes collected since 2008. It provides detailed information on nutrition, ingredients, cooking instructions, and recipe categories. By analyzing this data, we can identify patterns in calorie content and build predictive models that help users estimate the nutritional value of recipes before preparing them.
 
@@ -73,11 +73,11 @@ After cleaning, the dataset contained 83,782 rows with 22 columns. Only 39 recip
 
 ## Univariate Analysis
 
-We examined the distributions of key variables to understand the data structure. The distribution of calories shows that most recipes have moderate calorie counts, with the majority falling below 500 calories. The distribution is right-skewed, with some recipes having very high calorie counts (up to nearly 10,000 calories per serving).
+I examined the distributions of key variables to understand the data structure. The distribution of calories shows that most recipes have moderate calorie counts, with the majority falling below 500 calories. The distribution is right-skewed, with some recipes having very high calorie counts (up to nearly 10,000 calories per serving).
 
 <iframe src="assets/calories_distribution.html" width=800 height=600 frameBorder=0></iframe>
 
-The histogram above shows the distribution of calories per recipe. Most recipes cluster in the 0-500 calorie range, with fewer recipes having extremely high calorie counts. This right-skewed distribution is expected, as most everyday recipes tend to be moderate in calories, while some special occasion or complex recipes can be much higher.
+The histogram above shows the distribution of calories per recipe. Most recipes cluster in the 0-500 calorie range, with fewer recipes having extremely high calorie counts. This right-skewed distribution is to be expected, as most everyday recipes tend to be moderate in calories, while some special occasion or complex recipes can be much higher.
 
 ## Bivariate Analysis
 
@@ -95,7 +95,7 @@ The box plot shows that main-dish recipes have the highest median calories, foll
 
 ## Interesting Aggregates
 
-We aggregated the data to identify patterns in calorie content across different groupings:
+I aggregated the data to identify patterns in calorie content across different groupings:
 
 ### Average Calories by Recipe Category:
 
@@ -135,21 +135,21 @@ There is a clear positive relationship between the number of ingredients and ave
 
 I do not believe there is a column in this dataset that is NMAR (Not Missing At Random). The missingness in the dataset appears to be either MCAR (Missing Completely At Random) or MAR (Missing At Random).
 
-The `calories` column has 39 missing values out of 83,782 recipes (0.05% missing). The missingness likely occurred due to data entry errors, parsing failures when extracting nutrition information from the original nutrition string, or cases where the nutrition data was incomplete in the source. This type of missingness is not related to the actual calorie value itself - recipes with high calories are not more or less likely to have missing data than recipes with low calories. If we had access to additional data such as the original source of the nutrition information, whether the recipe was user-submitted or from a professional database, or the date when the recipe was added, we might be able to explain the missingness and make it MAR.
+The `calories` column has 39 missing values out of 83,782 recipes (0.05% missing). The missingness likely occurred due to data entry errors, parsing failures when extracting nutrition information from the original nutrition string, or cases where the nutrition data was incomplete in the source. This type of missingness is not related to the actual calorie value itself - recipes with high calories are not more or less likely to have missing data than recipes with low calories. If we had access to additional data such as the original source of the nutrition information, then we would be able to acess wether the information is MAR or not due to the source that it comes from.
 
 ## Missingness Dependency
 
-We performed permutation tests to analyze whether the missingness of the `calories` column depends on other columns in the dataset.
+I performed permutation tests to analyze whether the missingness of the `calories` column depends on other columns in the dataset.
 
 ### Test 1: Missingness of calories depends on n_ingredients
 
-We tested whether recipes with missing calories have different numbers of ingredients compared to recipes with non-missing calories. The permutation test revealed:
+I tested whether recipes with missing calories have different numbers of ingredients compared to recipes with non-missing calories. The permutation test revealed:
 
 - **Observed difference in means**: 3.10 ingredients
 - **P-value**: 0.0000
 - **Conclusion**: The missingness of calories is **dependent** on `n_ingredients` (p < 0.05)
 
-This suggests that recipes with more ingredients are more likely to have missing calorie data, possibly because more complex recipes are harder to calculate nutrition for, or because they were entered differently in the source system.
+This suggests that recipes with more ingredients are more likely to have missing calorie data, possibly because more complex recipes are harder to calculate nutrition for, or because they were entered differently in the source system. It could also just mean the more complex nature of the recipes makes it harder to input all the information
 
 <iframe src="assets/missingness_ingredients.html" width=800 height=600 frameBorder=0></iframe>
 
@@ -157,7 +157,7 @@ The histogram above shows the empirical distribution of the test statistic from 
 
 ### Test 2: Missingness of calories depends on is_dessert
 
-We also tested whether dessert recipes are more or less likely to have missing calories:
+I also tested whether dessert recipes are more or less likely to have missing calories:
 
 - **Observed difference in means**: 0.38
 - **P-value**: 0.0000
@@ -170,7 +170,7 @@ This indicates that dessert recipes have a different pattern of missing calorie 
 
 # Hypothesis Testing <a name="hypothesistesting"></a>
 
-We performed two hypothesis tests to investigate relationships between recipe characteristics and calorie content.
+I performed two hypothesis tests to investigate relationships between recipe characteristics and calorie content.
 
 ## Hypothesis Test 1: Do dessert recipes have higher average calories than non-dessert recipes?
 
@@ -217,13 +217,13 @@ The permutation test distribution shows that the observed difference of 121.93 c
 <!-- #region -->
 # Framing a Prediction Problem <a name="framingpredictionproblem"></a>
 
-In this project, our objective is to create a model that predicts the calorie count in a recipe based on its characteristics. Since the target variable, calories, is a continuous numeric value, this is a **regression** task.
+My objective is to create a model that predicts the calorie count in a recipe based on its characteristics. Since the target variable, calories, is a continuous numeric value, this is a **regression** task.
 
-- **Response Variable**: The target variable for our model is **calories**, the number of calories per serving for each recipe. Calories is a fundamental nutritional metric that many people care about when choosing recipes. It's directly available in the dataset and represents a meaningful target for prediction. Understanding what factors influence calorie content can help people make informed dietary choices.
+- **Response Variable**: The target variable for the model is **calories**, the number of calories per serving for each recipe. It's directly available in the dataset and represents a meaningful target for prediction. Understanding what factors influence calorie content can help people make informed dietary choices.
 
-- **Evaluation Metric**: We use **Root Mean Squared Error (RMSE)** to evaluate our model. RMSE is a standard metric for regression problems that penalizes larger errors more heavily than smaller ones, which is important for calorie prediction where being off by 500 calories is much worse than being off by 50 calories. RMSE is in the same units as the response variable (calories), making it interpretable. Compared to Mean Absolute Error (MAE), RMSE gives more weight to outliers, which is appropriate when large prediction errors are particularly problematic. Compared to R², RMSE provides an absolute measure of error that is easier to interpret in the context of the problem (e.g., "our model is off by an average of X calories").
+- **Evaluation Metric**: I will use **Root Mean Squared Error (RMSE)** to evaluate the model. RMSE is a standard metric for regression problems that penalizes larger errors more heavily than smaller ones, which is important for calorie prediction where being off by 500 calories is much worse than being off by 50 calories. RMSE is in the same units as the response variable (calories), making it interpretable. Compared to Mean Absolute Error (MAE), RMSE gives more weight to outliers, which is appropriate when large prediction errors are particularly problematic. Compared to R², RMSE provides an absolute measure of error that is easier to interpret in the context of the problem.
 
-- **Features Available at Time of Prediction**: At the time of prediction, we would have access to recipe characteristics that are known before the recipe is prepared:
+- **Features Available at Time of Prediction**: At the time of prediction, I would have access to recipe characteristics that are known before the recipe is prepared:
   - `n_ingredients`: Number of ingredients (quantitative)
   - `ingredients_list`: List of ingredients (nominal - can be used to create features)
   - `minutes`: Cooking time in minutes (quantitative)
@@ -234,7 +234,7 @@ In this project, our objective is to create a model that predicts the calorie co
   - `description`: Recipe description text (can be used for text-based features)
   - `name`: Recipe name (can potentially be used for text-based features)
 
-- **Features NOT Used**: We do not use other nutrition values (`total_fat_pdv`, `sugar_pdv`, `sodium_pdv`, `protein_pdv`, `saturated_fat_pdv`, `carbs_pdv`) because these are derived from the same nutrition calculation as calories and would create circular reasoning. If we could predict these, we could likely predict calories directly. We also do not use `submitted` (submission date), `contributor_id`, or `id` as these are not relevant for predicting calories.
+- **Features NOT Used**: I do not use other nutrition values (`total_fat_pdv`, `sugar_pdv`, `sodium_pdv`, `protein_pdv`, `saturated_fat_pdv`, `carbs_pdv`) because these are derived from the same nutrition calculation as calories and would create circular reasoning. If I could predict these, the model could likely predict calories directly. I also do not use `submitted` (submission date), `contributor_id`, or `id` as these are not relevant for predicting calories.
 
 <!-- #endregion -->
 <!-- #region -->
@@ -251,15 +251,15 @@ In this project, our objective is to create a model that predicts the calorie co
 
 - **Performance**: The baseline model achieves a test RMSE of 496.00 calories. This means that on average, the model's predictions are off by approximately 496 calories from the true calorie values. The training RMSE is 516.51 calories, and the test RMSE is actually slightly lower, indicating good generalization with no signs of overfitting.
 
-- **Model Assessment**: This baseline model is a reasonable starting point, but there is significant room for improvement. The model uses only two simple features, and while these features do show associations with calories (as demonstrated in the exploratory data analysis), they capture only a limited amount of the variation in calorie content. The relatively high RMSE (496 calories) compared to the mean calorie count (approximately 419 calories) represents a 118.5% error rate, suggesting that many other factors influence recipe calories that are not captured by these two features alone. In the final model, we will add more features and potentially use a more sophisticated modeling algorithm to improve performance.
+- **Model Assessment**: This baseline model is a reasonable starting point, but there is significant room for improvement. The model uses only two simple features, and while these features do show associations with calories (as demonstrated in the exploratory data analysis), they capture only a limited amount of the variation in calorie content. The relatively high RMSE (496 calories) compared to the mean calorie count (approximately 419 calories) represents a 118.5% error rate, suggesting that many other factors influence recipe calories that are not captured by these two features alone. In the final model, I will add more features and potentially use a more sophisticated modeling algorithm to improve performance.
 
 <!-- #endregion -->
 
 # Final Model <a name="finalmodel"></a>
 
-For our final model, we transitioned from the Linear Regression model to a **Random Forest Regressor** due to the limitations of the baseline model in terms of performance. The Random Forest Regressor was chosen because it handles non-linear relationships effectively, is robust to overfitting, and performs well on datasets with mixed feature types.
+For our final model, I transitioned from the Linear Regression model to a **Random Forest Regressor** due to the limitations of the baseline model in terms of performance. The Random Forest Regressor was chosen because it handles non-linear relationships effectively, is robust to overfitting, and performs well on datasets with mixed feature types.
 
-- **Description**: Our final model uses additional features beyond the baseline, including `minutes` (cooking time), `n_steps` (number of steps), and several engineered features derived from the ingredients list. These features were added based on domain knowledge and exploratory data analysis, which showed that recipe complexity and ingredient composition are important factors in calorie content.
+- **Description**: The final model uses additional features beyond the baseline, including `minutes` (cooking time), `n_steps` (number of steps), and several engineered features derived from the ingredients list. These features were added based on exploratory data analysis, which showed that recipe complexity and ingredient composition are important factors in calorie content.
 
 - **New Features Added**:
   1. **`minutes` (Cooking Time)** - Quantitative feature transformed with QuantileTransformer. Cooking time can indicate recipe complexity and preparation method, which may correlate with calorie content. QuantileTransformer handles outliers and non-linear relationships.
@@ -288,9 +288,7 @@ For our final model, we transitioned from the Linear Regression model to a **Ran
 
 ## Algorithm and Hyperparameters 
 
-We chose the **Random Forest Regressor** for its ability to handle non-linear relationships, reduced susceptibility to overfitting compared to individual decision trees, and effectiveness in modeling complex datasets with mixed feature types.
-
-We used **GridSearchCV** with 5-fold cross-validation for hyperparameter tuning. The hyperparameter grid included:
+I used **GridSearchCV** with 5-fold cross-validation for hyperparameter tuning. The hyperparameter grid included:
 - **Number of Estimators (n_estimators)**: [50, 100, 200]
 - **Maximum Depth of Trees (max_depth)**: [10, 20, 30, None]
 - **Minimum Samples Split (min_samples_split)**: [2, 5, 10]
@@ -321,9 +319,21 @@ The relatively high RMSE (around 490 calories) is expected given the limitations
 <!-- #region -->
 # Fairness Analysis <a name="fairnessanalysis"></a>
 
-In this analysis, we compare the model's performance across different recipe categories to determine if the model performs differently for different types of recipes. We analyze whether the model is fair by comparing RMSE and mean prediction bias across all recipe categories.
+In this analysis, I compare the model's performance across dessert vs non dessert recipes. However after seeing the results: 
 
-**Groups Compared**: We compare each recipe category (appetizers, beverages, breakfast, desserts, dinner, lunch, main-dish, other, salads, side-dishes, soups) against all other categories combined.
+Null Hypothesis: The model is fair. The RMSE for dessert recipes and
+                 non-dessert recipes are roughly the same, and any
+                 differences are due to random chance.
+Alternative Hypothesis: The model is unfair. The RMSE for dessert recipes
+                        is different from the RMSE for non-dessert recipes.
+                        
+Permutation test results:
+  Observed difference: 347.49 calories
+  P-value: 0.0000
+
+I also compare different recipe categories to determine if the model performs differently for different types of recipes. I analyze whether the model is fair by comparing RMSE and mean prediction bias across all recipe categories.
+
+**Groups Compared**: I compare each recipe category (appetizers, beverages, breakfast, desserts, dinner, lunch, main-dish, other, salads, side-dishes, soups) against all other categories combined.
 
 **Evaluation Metric**: Root Mean Squared Error (RMSE)
 
@@ -359,7 +369,7 @@ The bar chart above shows RMSE by recipe category. Desserts have the highest RMS
 
 <iframe src="assets/fairness_actual_vs_predicted.html" width=800 height=600 frameBorder=0></iframe>
 
-The grouped bar chart above compares actual mean calories vs predicted mean calories for each category. While the model's mean predictions are generally close to actual means, there are some discrepancies, particularly for lunch recipes where the model under-predicts.
+The grouped bar chart above compares actual mean calories vs predicted mean calories for each category. While the model's mean predictions are generally close to actual means, there are some discrepancies.
 
 <iframe src="assets/fairness_percent_difference.html" width=800 height=600 frameBorder=0></iframe>
 
@@ -371,9 +381,7 @@ The permutation tests reveal that the model is **not fair** across all recipe ca
 
 The poor performance for desserts is likely due to the high variability in dessert calorie content (as seen in the EDA, desserts have a standard deviation of 819.54 calories) and the fact that desserts can range from simple fruit-based recipes (low calories) to rich, complex baked goods (very high calories). The model struggles to capture this wide variability using the available features.
 
-Additionally, the model shows systematic bias for lunch recipes, under-predicting their mean calories by 16.11%. This suggests that lunch recipes may have characteristics that the model does not adequately capture.
-
-These findings indicate that while the model provides reasonable predictions on average, it has fairness issues that should be addressed, particularly for dessert recipes. Future improvements could include adding more dessert-specific features or using category-specific models.
+These findings indicate that while the model provides reasonable predictions on average, it has fairness issues, particularly for dessert recipes. However with the data given and available to be used, without using specific DPV values (as those would not be available at the time before preperation of the recipes) The model performs well in accuracy so it has a low bias but high variance due to the nature of the data with some desserts being fruit based for example vs others being vert high in fat and calories.
 
 <!-- #endregion -->
 
